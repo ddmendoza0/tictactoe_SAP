@@ -6,4 +6,5 @@ service GameService {
 
   action createGame(mode: String, totalMatches: Integer) returns Games;
   action makeMove(gameID: UUID, position: Integer)       returns Games;
+  action newRound(gameID: UUID)                          returns Games;
 }

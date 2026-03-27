@@ -93,6 +93,21 @@ module.exports = cds.service.impl(async function () {
 
     return SELECT.one(Games).where({ ID: gameID })
   })
+
+  //Resets the board for a new round keeping scores
+  this.on('newRound', async (req) => {
+    const { gameID } = req.data
+    const game = await SELECT.one(Games).where({ ID: gameID })
+    if (!game) return req.error(404, 'Game not found')
+
+    await UPDATE(Games).set({
+      board: boardToString(Array(9).fill('')),
+      status: 'active',
+      currentPlayer: 'X'
+    }).where({ ID: gameID })
+
+    return SELECT.one(Games).where({ ID: gameID })
+  })
 })
 
 // Handles end of a round
@@ -116,3 +131,4 @@ async function handleRoundEnd(Games, game, board, winner) {
 
   return SELECT.one(Games).where({ ID: game.ID })
 }
+

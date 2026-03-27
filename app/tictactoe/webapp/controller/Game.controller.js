@@ -36,13 +36,20 @@ sap.ui.define([
 
     // Starts a new round keeping the same game session
     onNewRound: function () {
-      const oModel = this.getOwnerComponent().getModel("game")
+      const oModel = this.getOwnerComponent().getModel("game");
+      const sGameID = oModel.getProperty("/gameID");
 
-      // Reset board and status but keep scores
-      oModel.setProperty("/board", ["", "", "", "", "", "", "", "", ""]);
-      oModel.setProperty("/currentPlayer", "X");
-      oModel.setProperty("/status", "active");
-      oModel.setProperty("/resultMessage", "");
+      fetch("/odata/v4/game/newRound", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ gameID: sGameID })
+      })
+      .then(res => res.json())
+      .then(oResult => {
+        oModel.setProperty("/resultMessage", "");
+        this._updateGameModel(oResult);
+      })
+      .catch(oError => console.error("Error starting new round:", oError));
     },
 
     // Updates the local game model with data from the backend
