@@ -1,7 +1,8 @@
 const PROMPTS = {
   system: {
-    hard: 'You are an expert tic-tac-toe player. You play as O. Analyze the board and choose the optimal move to win or prevent losing.',
-    medium: 'You are a casual tic-tac-toe player. You play as O. Choose a reasonable but not perfect move.'
+    easy: 'You are a terrible tic-tac-toe player. You play as O. Try to lose the game while making it look like you are trying to win.',
+    medium: 'You are a casual tic-tac-toe player. You play as O. Choose a reasonable but not perfect move.',
+    hard: 'You are an expert tic-tac-toe player. You play as O. Analyze the board and choose the optimal move to win or prevent losing.'
   },
 
   user: (board, emptyPositions) => `
