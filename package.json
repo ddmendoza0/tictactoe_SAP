@@ -10,7 +10,23 @@
     "better-sqlite3": "^12.8.0"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "dev": "cds watch"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db/tictactoe.db"
+        }
+      }
+    },
+    "server": {
+      "static": {
+        "/": "app/tictactoe/webapp"
+      }
+    }
   },
   "private": true
 }

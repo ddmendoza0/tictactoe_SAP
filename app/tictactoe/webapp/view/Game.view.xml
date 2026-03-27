@@ -1,0 +1,81 @@
+<mvc:View
+  controllerName="tictactoe.controller.Game"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+
+  <Page title="Tic-Tac-Toe" showNavButton="true" navButtonPress=".onNavBack">
+    <content>
+      <VBox alignItems="Center" class="sapUiMediumMarginTop">
+
+        <!-- Scoreboard -->
+        <HBox justifyContent="Center" alignItems="Center" class="sapUiMediumMarginBottom">
+          <VBox alignItems="Center" class="sapUiMediumMarginEnd">
+            <Title text="Player X" />
+            <Title text="{game>/player1Score}" level="H2" />
+          </VBox>
+          <VBox alignItems="Center" class="sapUiMediumMarginEnd">
+            <Title text="vs" level="H4" />
+          </VBox>
+          <VBox alignItems="Center">
+            <Title text="{game>/mode === 'HvB' ? 'Bot' : 'Player O'}" />
+            <Title text="{game>/player2Score}" level="H2" />
+          </VBox>
+        </HBox>
+
+        <!-- Current Player -->
+        <MessageStrip
+          text="Player {game>/currentPlayer}'s turn"
+          type="Information"
+          showIcon="true"
+          showCloseButton="false"
+          visible="{= ${game>/status} === 'active' }"
+          class="sapUiMediumMarginBottom" />
+
+        <!-- Winner Message -->
+        <MessageStrip
+          text="{game>/resultMessage}"
+          type="Success"
+          showIcon="true"
+          showCloseButton="false"
+          visible="{= ${game>/status} === 'finished' }"
+          class="sapUiMediumMarginBottom" />
+
+        <!-- Board -->
+        <l:Grid
+          defaultSpan="L4 M4 S4"
+          class="sapUiMediumMarginBottom"
+          style="max-width: 300px">
+          <l:content>
+            <Button text="{game>/board/0}" press=".onCellPress" data-position="0" enabled="{= ${game>/board/0} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/1}" press=".onCellPress" data-position="1" enabled="{= ${game>/board/1} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/2}" press=".onCellPress" data-position="2" enabled="{= ${game>/board/2} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/3}" press=".onCellPress" data-position="3" enabled="{= ${game>/board/3} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/4}" press=".onCellPress" data-position="4" enabled="{= ${game>/board/4} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/5}" press=".onCellPress" data-position="5" enabled="{= ${game>/board/5} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/6}" press=".onCellPress" data-position="6" enabled="{= ${game>/board/6} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/7}" press=".onCellPress" data-position="7" enabled="{= ${game>/board/7} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/8}" press=".onCellPress" data-position="8" enabled="{= ${game>/board/8} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+          </l:content>
+        </l:Grid>
+
+        <!-- Actions -->
+        <HBox justifyContent="Center">
+          <Button
+            text="New Round"
+            type="Emphasized"
+            press=".onNewRound"
+            visible="{= ${game>/status} === 'finished' }"
+            class="sapUiSmallMarginEnd" />
+          <Button
+            text="Quit Game"
+            type="Reject"
+            press=".onNavBack" />
+        </HBox>
+
+      </VBox>
+    </content>
+  </Page>
+
+</mvc:View>

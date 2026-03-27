@@ -1,0 +1,100 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "tictactoe",
+    "type": "application",
+    "title": "Tic-Tac-Toe",
+    "description": "Tic-Tac-Toe game built with SAP CAP and UI5",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/game/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "tictactoe.view.App",
+      "type": "XML",
+      "displayBlock": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true
+        }
+      },
+      "game": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "data": {
+            "board": ["", "", "", "", "", "", "", "", ""],
+            "currentPlayer": "X",
+            "status": "active",
+            "player1Score": 0,
+            "player2Score": 0,
+            "gameID": null,
+            "difficulty": "medium",
+            "mode": "HvH",
+            "totalMatches": 3
+          }
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "tictactoe.view",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "name": "home",
+          "pattern": "",
+          "target": "home"
+        },
+        {
+          "name": "game",
+          "pattern": "game",
+          "target": "game"
+        }
+      ],
+      "targets": {
+        "home": {
+          "viewName": "Home"
+        },
+        "game": {
+          "viewName": "Game"
+        }
+      }
+    }
+  }
+}

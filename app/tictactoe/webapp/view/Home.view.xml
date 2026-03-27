@@ -1,0 +1,62 @@
+<mvc:View
+  controllerName="tictactoe.controller.Home"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form">
+
+  <Page title="Tic-Tac-Toe">
+    <content>
+      <VBox
+        alignItems="Center"
+        justifyContent="Center"
+        class="sapUiMediumMarginTop">
+
+        <!-- Game Mode -->
+        <Title text="Game Mode" class="sapUiSmallMarginBottom" />
+        <SegmentedButton
+          selectedKey="{game>/mode}"
+          class="sapUiMediumMarginBottom">
+          <items>
+            <SegmentedButtonItem key="HvH" text="Human vs Human" />
+            <SegmentedButtonItem key="HvB" text="Human vs Bot" />
+          </items>
+        </SegmentedButton>
+
+        <!-- Bot Difficulty (only visible in HvB mode) -->
+        <VBox visible="{= ${game>/mode} === 'HvB' }">
+          <Title text="Difficulty" class="sapUiSmallMarginBottom" />
+          <SegmentedButton
+            selectedKey="{game>/difficulty}"
+            class="sapUiMediumMarginBottom">
+            <items>
+              <SegmentedButtonItem key="easy" text="Easy" />
+              <SegmentedButtonItem key="medium" text="Medium" />
+              <SegmentedButtonItem key="hard" text="Hard" />
+            </items>
+          </SegmentedButton>
+        </VBox>
+
+        <!-- Number of Matches -->
+        <Title text="Best of" class="sapUiSmallMarginBottom" />
+        <SegmentedButton
+          selectedKey="{game>/totalMatches}"
+          class="sapUiMediumMarginBottom">
+          <items>
+            <SegmentedButtonItem key="3" text="3" />
+            <SegmentedButtonItem key="5" text="5" />
+            <SegmentedButtonItem key="7" text="7" />
+          </items>
+        </SegmentedButton>
+
+        <!-- Start Button -->
+        <Button
+          text="Start Game"
+          type="Emphasized"
+          press=".onStartGame" />
+
+      </VBox>
+    </content>
+  </Page>
+
+</mvc:View>
