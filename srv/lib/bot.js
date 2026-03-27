@@ -40,11 +40,28 @@ function minimax(board, isMaximizing) {
   }
 }
 
+function getEasyMove(board) {
+  let worstScore = Infinity
+  let worstMove = null
+  for (let i = 0; i < 9; i++) {
+    if (board[i] === '') {
+      board[i] = 'O'
+      const score = minimax(board, false)
+      board[i] = ''
+      if (score < worstScore) {
+        worstScore = score
+        worstMove = i
+      }
+    }
+  }
+  return worstMove
+}
+
 // Returns best move based on difficulty
 // easy — random, medium — mix, hard — minimax
 function getBotMove(board, difficulty) {
   if (difficulty === 'easy') {
-    return getRandomMove(board)
+    return getEasyMove(board)
   }
 
   if (difficulty === 'medium') {
