@@ -3,7 +3,7 @@ namespace tictactoe;
 entity Game {
   key ID        : UUID;
   mode          : String enum { HvH; HvB; };
-  status        : String enum { active; finished; };
+  status        : String enum { active; rounOver; finished; };
   currentPlayer : String;
   board         : String;
   totalMatches  : Integer;

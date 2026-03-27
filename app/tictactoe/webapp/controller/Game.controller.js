@@ -17,6 +17,10 @@ sap.ui.define([
       const iPosition = parseInt(oSource.data("position"));
       const oModel = this.getOwnerComponent().getModel("game");
       const sGameID = oModel.getProperty("/gameID");
+      const aBoard = oModel.getProperty("/board");
+      const sStatus = oModel.getProperty("/status");
+
+      if (sStatus !== "active" || aBoard[iPosition]) return;
 
       fetch("/odata/v4/game/makeMove", {
         method: "POST",
@@ -43,26 +47,31 @@ sap.ui.define([
 
     // Updates the local game model with data from the backend
     _updateGameModel: function (oResult) {
-      const oModel = this.getOwnerComponent().getModel("game")
+      if (!oResult || !oResult.board) return;
+
+      const oModel = this.getOwnerComponent().getModel("game");
       const aBoard = oResult.board.split(",");
+
+      let sResultMessage = "";
+      if (oResult.status === "finished" || oResult.status === "roundOver") {
+        if (oResult.player1Score > oResult.player2Score) {
+          sResultMessage = oResult.status === "finished" ? "Player X wins the series!" : "Player X wins the round!";
+        } else if (oResult.player2Score > oResult.player1Score) {
+          const sName = oModel.getProperty("/mode") === "HvB" ? "Bot" : "Player O";
+          sResultMessage = oResult.status === "finished" ? sName + " wins the series!" : sName + " wins the round!";
+        } else {
+          sResultMessage = "It's a draw!";
+        }
+      }
 
       oModel.setProperty("/board", aBoard);
       oModel.setProperty("/currentPlayer", oResult.currentPlayer);
-      oModel.setProperty("/status", oResult.status);
       oModel.setProperty("/player1Score", oResult.player1Score);
       oModel.setProperty("/player2Score", oResult.player2Score);
-
-      // Set result message when game ends
-      if (oResult.status === "finished") {
-        if (oResult.player1Score > oResult.player2Score) {
-          oModel.setProperty("/resultMessage", "Player X wins the series!");
-        } else if (oResult.player2Score > oResult.player1Score) {
-          const sWinner = oModel.getProperty("/mode") === "HvB" ? "Bot" : "Player O";
-          oModel.setProperty("/resultMessage", sWinner + " wins the series!");
-        } else {
-          oModel.setProperty("/resultMessage", "It's a draw!");
-        }
-      }
+      oModel.setProperty("/totalMatches", oResult.totalMatches);
+      oModel.setProperty("/resultMessage", sResultMessage);
+      // Set status last to trigger visibility bindings
+      oModel.setProperty("/status", oResult.status);
     }
 
   });

@@ -108,7 +108,7 @@ async function handleRoundEnd(Games, game, board, winner) {
 
   await UPDATE(Games).set({
     board: boardToString(board),
-    status: seriesOver ? 'finished' : 'active',
+    status: seriesOver ? 'finished' : 'roundOver',
     currentPlayer: 'X',
     player1Score,
     player2Score

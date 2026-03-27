@@ -39,7 +39,7 @@
           type="Success"
           showIcon="true"
           showCloseButton="false"
-          visible="{= ${game>/status} === 'finished' }"
+            visible="{= ${game>/status} === 'finished' || ${game>/status} === 'roundOver' }"
           class="sapUiMediumMarginBottom" />
 
         <!-- Board -->
@@ -48,31 +48,40 @@
           class="sapUiMediumMarginBottom"
           width="300px">
           <l:content>
-            <Button text="{game>/board/0}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/0}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="0" /></customData>
             </Button>
-            <Button text="{game>/board/1}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/1}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="1" /></customData>
             </Button>
-            <Button text="{game>/board/2}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/2}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="2" /></customData>
             </Button>
-            <Button text="{game>/board/3}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/3}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="3" /></customData>
             </Button>
-            <Button text="{game>/board/4}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/4}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="4" /></customData>
             </Button>
-            <Button text="{game>/board/5}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/5}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="5" /></customData>
             </Button>
-            <Button text="{game>/board/6}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/6}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="6" /></customData>
             </Button>
-            <Button text="{game>/board/7}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/7}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="7" /></customData>
             </Button>
-            <Button text="{game>/board/8}" press=".onCellPress" width="100px" type="Ghost">
+            <Button text="{game>/board/8}" press=".onCellPress" width="100px" type="Ghost"
+            enabled="{= ${game>/status} === 'active' }">
               <customData><core:CustomData key="position" value="8" /></customData>
             </Button>
           </l:content>
@@ -83,7 +92,7 @@
             text="New Round"
             type="Emphasized"
             press=".onNewRound"
-            visible="{= ${game>/status} === 'finished' }"
+            visible="{= ${game>/status} === 'finished' || ${game>/status} === 'roundOver' }"
             class="sapUiSmallMarginEnd" />
           <Button
             text="Quit Game"
