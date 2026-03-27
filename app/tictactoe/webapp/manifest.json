@@ -53,17 +53,15 @@
       "game": {
         "type": "sap.ui.model.json.JSONModel",
         "settings": {
-          "data": {
-            "board": ["", "", "", "", "", "", "", "", ""],
-            "currentPlayer": "X",
-            "status": "active",
-            "player1Score": 0,
-            "player2Score": 0,
-            "gameID": null,
-            "difficulty": "medium",
-            "mode": "HvH",
-            "totalMatches": 3
-          }
+          "board": ["", "", "", "", "", "", "", "", ""],
+          "currentPlayer": "X",
+          "status": "active",
+          "player1Score": 0,
+          "player2Score": 0,
+          "gameID": null,
+          "difficulty": "medium",
+          "mode": "HvH",
+          "totalMatches": 3
         }
       }
     },

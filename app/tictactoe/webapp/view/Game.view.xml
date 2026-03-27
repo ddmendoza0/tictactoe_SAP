@@ -43,23 +43,40 @@
           class="sapUiMediumMarginBottom" />
 
         <!-- Board -->
-        <l:Grid
+       <l:Grid
           defaultSpan="L4 M4 S4"
           class="sapUiMediumMarginBottom"
-          style="max-width: 300px">
+          width="300px">
           <l:content>
-            <Button text="{game>/board/0}" press=".onCellPress" data-position="0" enabled="{= ${game>/board/0} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/1}" press=".onCellPress" data-position="1" enabled="{= ${game>/board/1} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/2}" press=".onCellPress" data-position="2" enabled="{= ${game>/board/2} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/3}" press=".onCellPress" data-position="3" enabled="{= ${game>/board/3} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/4}" press=".onCellPress" data-position="4" enabled="{= ${game>/board/4} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/5}" press=".onCellPress" data-position="5" enabled="{= ${game>/board/5} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/6}" press=".onCellPress" data-position="6" enabled="{= ${game>/board/6} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/7}" press=".onCellPress" data-position="7" enabled="{= ${game>/board/7} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
-            <Button text="{game>/board/8}" press=".onCellPress" data-position="8" enabled="{= ${game>/board/8} === '' &amp;&amp; ${game>/status} === 'active' }" style="width:100px;height:100px;font-size:2rem" />
+            <Button text="{game>/board/0}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="0" /></customData>
+            </Button>
+            <Button text="{game>/board/1}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="1" /></customData>
+            </Button>
+            <Button text="{game>/board/2}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="2" /></customData>
+            </Button>
+            <Button text="{game>/board/3}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="3" /></customData>
+            </Button>
+            <Button text="{game>/board/4}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="4" /></customData>
+            </Button>
+            <Button text="{game>/board/5}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="5" /></customData>
+            </Button>
+            <Button text="{game>/board/6}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="6" /></customData>
+            </Button>
+            <Button text="{game>/board/7}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="7" /></customData>
+            </Button>
+            <Button text="{game>/board/8}" press=".onCellPress" width="100px" type="Ghost">
+              <customData><core:CustomData key="position" value="8" /></customData>
+            </Button>
           </l:content>
         </l:Grid>
-
         <!-- Actions -->
         <HBox justifyContent="Center">
           <Button

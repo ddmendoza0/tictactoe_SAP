@@ -15,24 +15,24 @@ sap.ui.define([
     onCellPress: function (oEvent) {
       const oSource = oEvent.getSource();
       const iPosition = parseInt(oSource.data("position"));
-      const oModel = this.getView().getModel("game");
+      const oModel = this.getOwnerComponent().getModel("game");
       const sGameID = oModel.getProperty("/gameID");
 
-      // Call backend to process the move
-      const oODataModel = this.getView().getModel();
-      oODataModel.bindContext("/makeMove(...)").invoke({
-        gameID: sGameID,
-        position: iPosition
-      }).then((oResult) => {
+      fetch("/odata/v4/game/makeMove", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ gameID: sGameID, position: iPosition })
+      })
+      .then(res => res.json())
+      .then(oResult => {
         this._updateGameModel(oResult);
-      }).catch((oError) => {
-        console.error("Error making move:", oError);
-      });
+      })
+      .catch(oError => console.error("Error making move:", oError));
     },
 
     // Starts a new round keeping the same game session
     onNewRound: function () {
-      const oModel = this.getView().getModel("game");
+      const oModel = this.getOwnerComponent().getModel("game")
 
       // Reset board and status but keep scores
       oModel.setProperty("/board", ["", "", "", "", "", "", "", "", ""]);
@@ -43,7 +43,7 @@ sap.ui.define([
 
     // Updates the local game model with data from the backend
     _updateGameModel: function (oResult) {
-      const oModel = this.getView().getModel("game");
+      const oModel = this.getOwnerComponent().getModel("game")
       const aBoard = oResult.board.split(",");
 
       oModel.setProperty("/board", aBoard);

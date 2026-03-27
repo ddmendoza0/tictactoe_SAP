@@ -8,20 +8,20 @@ sap.ui.define([
 
     // Triggered when the user clicks "Start Game"
     onStartGame: function () {
-      const oModel = this.getView().getModel("game");
+      const oModel = this.getOwnerComponent().getModel("game");
       const sMode = oModel.getProperty("/mode");
       const iTotalMatches = parseInt(oModel.getProperty("/totalMatches"));
-      const sDifficulty = oModel.getProperty("/difficulty");
 
-      // Call backend to create a new game
-      const oODataModel = this.getView().getModel();
-      oODataModel.bindContext("/createGame(...)").invoke({
-        mode: sMode,
-        totalMatches: iTotalMatches
-      }).then((oResult) => {
+      // Call CAP action directly via fetch
+      fetch("/odata/v4/game/createGame", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: sMode, totalMatches: iTotalMatches })
+      })
+      .then(res => res.json())
+      .then(oResult => {
         const sGameID = oResult.ID;
 
-        // Store game ID and settings in local model
         oModel.setProperty("/gameID", sGameID);
         oModel.setProperty("/board", ["", "", "", "", "", "", "", "", ""]);
         oModel.setProperty("/currentPlayer", "X");
@@ -30,12 +30,10 @@ sap.ui.define([
         oModel.setProperty("/player2Score", 0);
         oModel.setProperty("/resultMessage", "");
 
-        // Navigate to game screen
+        localStorage.setItem("tictactoe_gameID", sGameID);
         UIComponent.getRouterFor(this).navTo("game");
-      }).catch((oError) => {
-        console.error("Error creating game:", oError);
-      });
+      })
+      .catch(oError => console.error("Error creating game:", oError));
     }
-
   });
 });

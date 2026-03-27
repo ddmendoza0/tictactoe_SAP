@@ -8,9 +8,10 @@ module.exports = cds.service.impl(async function () {
   // Creates a new game session
   this.on('createGame', async (req) => {
     const { mode, totalMatches } = req.data
+    const id = cds.utils.uuid()
 
-    const game = await INSERT.into(Games).entries({
-      ID: cds.utils.uuid(),
+    await INSERT.into(Games).entries({
+      ID: id,
       mode,
       status: 'active',
       currentPlayer: 'X',
@@ -21,7 +22,9 @@ module.exports = cds.service.impl(async function () {
       createdAt: new Date()
     })
 
-    return SELECT.one(Games).where({ ID: game.ID })
+    // Explicitly select and return the created game
+    const game = await SELECT.one(Games).where({ ID: id })
+    return game
   })
 
   // Processes move and triggers bot if needed
