@@ -1,7 +1,7 @@
 const { checkWinner, isBoardFull } = require('./game-logic')
 const { PROMPTS } = require('./prompts')
 
-//EASY - Returns a random empty position on the board
+//Returns a random empty position on the board
 function getRandomMove(board) {
   const empty = board
     .map((cell, index) => cell === '' ? index : null)
@@ -57,18 +57,7 @@ function getEasyMove(board) {
   return worstMove
 }
 
-// Returns best move based on difficulty
-// easy — random, medium — mix, hard — minimax
-function getBotMove(board, difficulty) {
-  if (difficulty === 'easy') {
-    return getEasyMove(board)
-  }
-
-  if (difficulty === 'medium') {
-    return Math.random() < 0.5 ? getRandomMove(board) : getBotMove(board, 'hard')
-  }
-
-  // hard — minimax
+function getHardMove(board) {
   let bestScore = -Infinity
   let bestMove = null
   for (let i = 0; i < 9; i++) {
@@ -85,8 +74,21 @@ function getBotMove(board, difficulty) {
   return bestMove
 }
 
+// Returns best move based on difficulty
+// easy — reverseminimax, medium — minimax+random, hard — minimax
+function getBotMove(board, difficulty) {
+  if (difficulty === 'easy') return getEasyMove(board)
+
+  if (difficulty === 'medium') {
+    const useRandom = Math.random() < 0.5
+    return useRandom ? getRandomMove(board) : getHardMove(board)
+  }
+
+  return getHardMove(board)
+}
+
 // Calls OpenAI API to get bot move based on current board state
-// Falls back to minimax if API call fails or returns invalid response
+// Falls back to code logic if API call fails or returns invalid response
 async function getAIMoveFromOpenAI(board, difficulty) {
   const OpenAI = require('openai')
   const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
