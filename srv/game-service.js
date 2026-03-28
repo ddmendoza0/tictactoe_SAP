@@ -120,6 +120,7 @@ async function handleRoundEnd(Games, game, board, winner) {
   // Check if someone won
   const winsNeeded = Math.ceil(totalMatches / 2)
   const seriesOver = player1Score >= winsNeeded || player2Score >= winsNeeded
+  const isDraw = !winner
 
   await UPDATE(Games).set({
     board: boardToString(board),
@@ -129,6 +130,8 @@ async function handleRoundEnd(Games, game, board, winner) {
     player2Score
   }).where({ ID: game.ID })
 
-  return SELECT.one(Games).where({ ID: game.ID })
+  const result = await SELECT.one(Games).where({ ID: game.ID })
+  result.isDraw = isDraw
+  return result
 }
 

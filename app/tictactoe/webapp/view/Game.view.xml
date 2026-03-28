@@ -92,7 +92,7 @@
             text="New Round"
             type="Emphasized"
             press=".onNewRound"
-            visible="{= ${game>/status} === 'finished' || ${game>/status} === 'roundOver' }"
+            visible="{= ${game>/status} === 'roundOver' }"
             class="sapUiSmallMarginEnd" />
           <Button
             text="Quit Game"

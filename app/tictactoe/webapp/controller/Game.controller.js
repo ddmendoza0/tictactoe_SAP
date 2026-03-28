@@ -61,13 +61,13 @@ sap.ui.define([
 
       let sResultMessage = "";
       if (oResult.status === "finished" || oResult.status === "roundOver") {
-        if (oResult.player1Score > oResult.player2Score) {
+        if (oResult.isDraw) {
+          sResultMessage = "It's a draw!";
+        } else if (oResult.player1Score > oResult.player2Score) {
           sResultMessage = oResult.status === "finished" ? "Player X wins the series!" : "Player X wins the round!";
-        } else if (oResult.player2Score > oResult.player1Score) {
+        } else {
           const sName = oModel.getProperty("/mode") === "HvB" ? "Bot" : "Player O";
           sResultMessage = oResult.status === "finished" ? sName + " wins the series!" : sName + " wins the round!";
-        } else {
-          sResultMessage = "It's a draw!";
         }
       }
 
