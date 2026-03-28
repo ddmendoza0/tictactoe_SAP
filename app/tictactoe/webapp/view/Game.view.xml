@@ -5,28 +5,28 @@
   xmlns:l="sap.ui.layout"
   xmlns:core="sap.ui.core">
 
-  <Page title="Tic-Tac-Toe" showNavButton="true" navButtonPress=".onNavBack">
+  <Page title="{i18n>title}" showNavButton="true" navButtonPress=".onNavBack">
     <content>
       <VBox alignItems="Center" class="sapUiMediumMarginTop">
 
         <!-- Scoreboard -->
         <HBox justifyContent="Center" alignItems="Center" class="sapUiMediumMarginBottom">
           <VBox alignItems="Center" class="sapUiMediumMarginEnd">
-            <Title text="Player X" />
+            <Title text="{i18n>playerX}" />
             <Title text="{game>/player1Score}" level="H2" />
           </VBox>
           <VBox alignItems="Center" class="sapUiMediumMarginEnd">
-            <Title text="vs" level="H4" />
+            <Title text="{i18n>vs}" level="H4" />
           </VBox>
           <VBox alignItems="Center">
-            <Title text="{= ${game>/mode} === 'HvB' ? 'Bot' : 'Player O' }" />
+            <Title text="{= ${game>/mode} === 'HvB' ? ${i18n>bot} : ${i18n>playerO} }" />
             <Title text="{game>/player2Score}" level="H2" />
           </VBox>
         </HBox>
 
         <!-- Current Player -->
         <MessageStrip
-          text="Player {game>/currentPlayer}'s turn"
+          text="{game>/currentPlayerMessage}"
           type="Information"
           showIcon="true"
           showCloseButton="false"
@@ -39,11 +39,11 @@
           type="Success"
           showIcon="true"
           showCloseButton="false"
-            visible="{= ${game>/status} === 'finished' || ${game>/status} === 'roundOver' }"
+          visible="{= ${game>/status} === 'finished' || ${game>/status} === 'roundOver' }"
           class="sapUiMediumMarginBottom" />
 
         <!-- Board -->
-       <l:Grid
+        <l:Grid
           defaultSpan="L4 M4 S4"
           class="sapUiMediumMarginBottom"
           width="300px">
@@ -86,16 +86,17 @@
             </Button>
           </l:content>
         </l:Grid>
+
         <!-- Actions -->
         <HBox justifyContent="Center">
           <Button
-            text="New Round"
+            text="{i18n>newRound}"
             type="Emphasized"
             press=".onNewRound"
             visible="{= ${game>/status} === 'roundOver' }"
             class="sapUiSmallMarginEnd" />
           <Button
-            text="Quit Game"
+            text="{i18n>quitGame}"
             type="Reject"
             press=".onNavBack" />
         </HBox>

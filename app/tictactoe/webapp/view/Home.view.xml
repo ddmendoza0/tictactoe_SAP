@@ -13,28 +13,28 @@
         class="sapUiMediumMarginTop">
 
         <!-- Game Mode -->
-        <Title text="Game Mode" class="sapUiSmallMarginBottom" />
+        <Title text="{i18n>gameMode}" class="sapUiSmallMarginBottom" />
         <SegmentedButton selectedKey="{game>/mode}" class="sapUiMediumMarginBottom">
           <items>
-            <SegmentedButtonItem key="HvH" text="Human vs Human" width="150px" />
-            <SegmentedButtonItem key="HvB" text="Human vs Bot" width="150px" />
+            <SegmentedButtonItem key="HvH" text="{i18n>humanVsHuman}" width="200px" />
+            <SegmentedButtonItem key="HvB" text="{i18n>humanVsBot}" width="200px" />
           </items>
         </SegmentedButton>
 
         <!-- Difficulty -->
         <VBox visible="{= ${game>/mode} === 'HvB' }">
-          <Title text="Difficulty" class="sapUiSmallMarginBottom" />
+          <Title text="{i18n>difficulty}" class="sapUiSmallMarginBottom" />
           <SegmentedButton selectedKey="{game>/difficulty}" class="sapUiMediumMarginBottom">
             <items>
-              <SegmentedButtonItem key="easy" text="Easy" width="80px" />
-              <SegmentedButtonItem key="medium" text="Medium" width="80px" />
-              <SegmentedButtonItem key="hard" text="Hard" width="80px" />
+              <SegmentedButtonItem key="easy" text="{i18n>easy}" width="80px" />
+              <SegmentedButtonItem key="medium" text="{i18n>medium}" width="80px" />
+              <SegmentedButtonItem key="hard" text="{i18n>hard}" width="80px" />
             </items>
           </SegmentedButton>
         </VBox>
 
         <!-- Best of -->
-        <Title text="Best of" class="sapUiSmallMarginBottom" />
+        <Title text="{i18n>bestOf}" class="sapUiSmallMarginBottom" />
         <SegmentedButton selectedKey="{game>/totalMatches}" class="sapUiMediumMarginBottom">
           <items>
             <SegmentedButtonItem key="3" text="3" width="50px" />
@@ -45,7 +45,7 @@
 
         <!-- Start Button -->
         <Button
-          text="Start Game"
+          text="{i18n>startGame}"
           type="Emphasized"
           press=".onStartGame" />
 

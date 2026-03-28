@@ -42,15 +42,22 @@ sap.ui.define([
             oResult.player1Score === oResult.player2Score && 
             !oResult.board.split(",").includes(""); 
 
+          const oBundle = this.getModel("i18n").getResourceBundle();
+
           if (oResult.status === "roundOver" || oResult.status === "finished") {
+            const bIsFinished = oResult.status === "finished";
             let sResultMessage = "";
+
             if (bIsDraw) {
-              sResultMessage = "It's a draw!";
+              sResultMessage = oBundle.getText("drawMessage");
             } else if (oResult.player1Score > oResult.player2Score) {
-              sResultMessage = oResult.status === "finished" ? "Player X wins the series!" : "Player X wins the round!";
+              sResultMessage = oBundle.getText(bIsFinished ? "playerXWinsSeries" : "playerXWinsRound");
             } else {
-              const sName = oResult.mode === "HvB" ? "Bot" : "Player O";
-              sResultMessage = oResult.status === "finished" ? sName + " wins the series!" : sName + " wins the round!";
+              if (oResult.mode === "HvB") {
+                sResultMessage = oBundle.getText(bIsFinished ? "botWinsSeries" : "botWinsRound");
+              } else {
+                sResultMessage = oBundle.getText(bIsFinished ? "playerOWinsSeries" : "playerOWinsRound");
+              }
             }
             oModel.setProperty("/resultMessage", sResultMessage);
           }

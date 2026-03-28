@@ -63,6 +63,12 @@
           "mode": "HvH",
           "totalMatches": 3
         }
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "tictactoe.i18n.i18n"
+        }
       }
     },
     "routing": {

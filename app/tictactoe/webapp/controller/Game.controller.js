@@ -57,18 +57,28 @@ sap.ui.define([
     _updateGameModel: function (oResult) {
       if (!oResult || !oResult.board) return;
 
-      const oModel = this.getOwnerComponent().getModel("game");
-      const aBoard = oResult.board.split(",");
+      const oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+      const oModel  = this.getOwnerComponent().getModel("game");
+      const aBoard  = oResult.board.split(",");
+
+      // Set current player message
+      oModel.setProperty("/currentPlayerMessage", oBundle.getText("playerTurn", [oResult.currentPlayer]));
 
       let sResultMessage = "";
       if (oResult.status === "finished" || oResult.status === "roundOver") {
+        const bIsFinished = oResult.status === "finished";
+        const sMode = oModel.getProperty("/mode");
+
         if (oResult.isDraw) {
-          sResultMessage = "It's a draw!";
+          sResultMessage = oBundle.getText("drawMessage");
         } else if (oResult.player1Score > oResult.player2Score) {
-          sResultMessage = oResult.status === "finished" ? "Player X wins the series!" : "Player X wins the round!";
+          sResultMessage = oBundle.getText(bIsFinished ? "playerXWinsSeries" : "playerXWinsRound");
         } else {
-          const sName = oModel.getProperty("/mode") === "HvB" ? "Bot" : "Player O";
-          sResultMessage = oResult.status === "finished" ? sName + " wins the series!" : sName + " wins the round!";
+          if (sMode === "HvB") {
+            sResultMessage = oBundle.getText(bIsFinished ? "botWinsSeries" : "botWinsRound");
+          } else {
+            sResultMessage = oBundle.getText(bIsFinished ? "playerOWinsSeries" : "playerOWinsRound");
+          }
         }
       }
 

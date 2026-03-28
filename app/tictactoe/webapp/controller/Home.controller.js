@@ -13,6 +13,9 @@ sap.ui.define([
       const sDifficulty   = oModel.getProperty("/difficulty");
       const iTotalMatches = parseInt(oModel.getProperty("/totalMatches"));
 
+      const oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+      oModel.setProperty("/currentPlayerMessage", oBundle.getText("playerTurn", ["X"]));
+
       // Call CAP action directly via fetch
       fetch("/odata/v4/game/createGame", {
         method: "POST",
