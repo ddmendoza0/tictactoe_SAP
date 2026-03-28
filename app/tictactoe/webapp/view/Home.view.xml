@@ -14,38 +14,32 @@
 
         <!-- Game Mode -->
         <Title text="Game Mode" class="sapUiSmallMarginBottom" />
-        <SegmentedButton
-          selectedKey="{game>/mode}"
-          class="sapUiMediumMarginBottom">
+        <SegmentedButton selectedKey="{game>/mode}" class="sapUiMediumMarginBottom">
           <items>
-            <SegmentedButtonItem key="HvH" text="Human vs Human" />
-            <SegmentedButtonItem key="HvB" text="Human vs Bot" />
+            <SegmentedButtonItem key="HvH" text="Human vs Human" width="150px" />
+            <SegmentedButtonItem key="HvB" text="Human vs Bot" width="150px" />
           </items>
         </SegmentedButton>
 
-        <!-- Bot Difficulty (only visible in HvB mode) -->
+        <!-- Difficulty -->
         <VBox visible="{= ${game>/mode} === 'HvB' }">
           <Title text="Difficulty" class="sapUiSmallMarginBottom" />
-          <SegmentedButton
-            selectedKey="{game>/difficulty}"
-            class="sapUiMediumMarginBottom">
+          <SegmentedButton selectedKey="{game>/difficulty}" class="sapUiMediumMarginBottom">
             <items>
-              <SegmentedButtonItem key="easy" text="Easy" />
-              <SegmentedButtonItem key="medium" text="Medium" />
-              <SegmentedButtonItem key="hard" text="Hard" />
+              <SegmentedButtonItem key="easy" text="Easy" width="80px" />
+              <SegmentedButtonItem key="medium" text="Medium" width="80px" />
+              <SegmentedButtonItem key="hard" text="Hard" width="80px" />
             </items>
           </SegmentedButton>
         </VBox>
 
-        <!-- Number of Matches -->
+        <!-- Best of -->
         <Title text="Best of" class="sapUiSmallMarginBottom" />
-        <SegmentedButton
-          selectedKey="{game>/totalMatches}"
-          class="sapUiMediumMarginBottom">
+        <SegmentedButton selectedKey="{game>/totalMatches}" class="sapUiMediumMarginBottom">
           <items>
-            <SegmentedButtonItem key="3" text="3" />
-            <SegmentedButtonItem key="5" text="5" />
-            <SegmentedButtonItem key="7" text="7" />
+            <SegmentedButtonItem key="3" text="3" width="50px" />
+            <SegmentedButtonItem key="5" text="5" width="50px" />
+            <SegmentedButtonItem key="7" text="7" width="50px" />
           </items>
         </SegmentedButton>
 
