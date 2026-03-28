@@ -8,6 +8,7 @@ sap.ui.define([
 
     // Navigate back to home screen
     onNavBack: function () {
+      localStorage.setItem("tictactoe_route", "home");
       UIComponent.getRouterFor(this).navTo("home");
     },
 

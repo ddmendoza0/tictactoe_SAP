@@ -19,7 +19,8 @@ sap.ui.define([
 
       // Restore game session from localStorage if available
       const sGameID = localStorage.getItem("tictactoe_gameID");
-      if (sGameID) {
+      const sRoute  = localStorage.getItem("tictactoe_route");
+      if (sGameID && sRoute === "game") {
         const oModel = this.getModel("game");
         oModel.setProperty("/gameID", sGameID);
 
@@ -61,6 +62,7 @@ sap.ui.define([
         .catch(() => {
           // Game not found — clear localStorage
           localStorage.removeItem("tictactoe_gameID");
+          localStorage.removeItem("tictactoe_route");
         });
       }
     }

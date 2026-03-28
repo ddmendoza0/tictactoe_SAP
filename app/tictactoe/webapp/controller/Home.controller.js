@@ -32,6 +32,7 @@ sap.ui.define([
         oModel.setProperty("/resultMessage", "");
 
         localStorage.setItem("tictactoe_gameID", sGameID);
+        localStorage.setItem("tictactoe_route", "game");
         UIComponent.getRouterFor(this).navTo("game");
       })
       .catch(oError => console.error("Error creating game:", oError));
