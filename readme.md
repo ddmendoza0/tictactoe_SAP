@@ -23,4 +23,4 @@ If no key is provided, the bot falls back to a minimax algorithm.
 - Human vs Bot (easy / medium / hard)
 - Configurable series length: best of 3, 5, or 7
 - Game state persists across browser refreshes
-- Multilanguage browser language dependant
+- Multilanguage support (English / Spanish)
