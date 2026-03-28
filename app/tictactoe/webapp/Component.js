@@ -34,6 +34,7 @@ sap.ui.define([
           oModel.setProperty("/player2Score", oResult.player2Score);
           oModel.setProperty("/totalMatches", oResult.totalMatches);
           oModel.setProperty("/mode", oResult.mode);
+          oModel.setProperty("/difficulty", oResult.difficulty);
 
           // Rebuild result message if round/series is over
           const bIsDraw = oResult.status === "roundOver" && 
