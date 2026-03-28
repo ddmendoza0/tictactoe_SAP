@@ -1,22 +1,25 @@
-# Getting Started
+# Tic-Tac-Toe — SAP CAP + UI5
 
-Welcome to your new CAP project.
+## Setup
 
-It contains these folders and files, following our recommended project layout:
+1. Install dependencies
+   npm install
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+2. Deploy the database
+   cds deploy --to sqlite/tictactoe.db
 
-## Next Steps
+3. Start the server
+   cds watch
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+4. Open http://localhost:4004
 
-## Learn More
+## Environment variables
 
-Learn more at <https://cap.cloud.sap>.
+Copy `.env.example` to `.env` and fill in your OpenAI key.
+If no key is provided, the bot falls back to a minimax algorithm.
+
+## Game modes
+- Human vs Human
+- Human vs Bot (easy / medium / hard)
+- Configurable series length: best of 3, 5, or 7
+- Game state persists across browser refreshes

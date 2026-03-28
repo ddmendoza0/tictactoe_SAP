@@ -8,15 +8,16 @@ sap.ui.define([
 
     // Triggered when the user clicks "Start Game"
     onStartGame: function () {
-      const oModel = this.getOwnerComponent().getModel("game");
-      const sMode = oModel.getProperty("/mode");
+      const oModel        = this.getOwnerComponent().getModel("game");
+      const sMode         = oModel.getProperty("/mode");
+      const sDifficulty   = oModel.getProperty("/difficulty");
       const iTotalMatches = parseInt(oModel.getProperty("/totalMatches"));
 
       // Call CAP action directly via fetch
       fetch("/odata/v4/game/createGame", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode: sMode, totalMatches: iTotalMatches })
+        body: JSON.stringify({ mode: sMode, difficulty: sDifficulty, totalMatches: iTotalMatches })
       })
       .then(res => res.json())
       .then(oResult => {

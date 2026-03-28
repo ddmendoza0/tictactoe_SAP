@@ -5,7 +5,7 @@ service GameService {
   entity Moves as projection on tictactoe.Move;
   entity History as projection on tictactoe.History;
 
-  action createGame(mode: String, totalMatches: Integer) returns Games;
+  action createGame(mode: String, totalMatches: Integer, difficulty: String) returns Games;
   action makeMove(gameID: UUID, position: Integer)       returns Games;
   action newRound(gameID: UUID)                          returns Games;
 }

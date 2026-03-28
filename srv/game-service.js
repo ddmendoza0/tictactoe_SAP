@@ -13,6 +13,7 @@ module.exports = cds.service.impl(async function () {
     await INSERT.into(Games).entries({
       ID: id,
       mode,
+      difficulty: req.data.difficulty || 'medium',
       status: 'active',
       currentPlayer: 'X',
       board: boardToString(Array(9).fill('')),
@@ -125,14 +126,14 @@ async function handleRoundEnd(Games, game, board, winner) {
     // Save to history when series ends
   if (seriesOver) {
     const { History } = cds.entities('tictactoe')
-    const winner = player1Score > player2Score ? 'X' : 'O'
+    const seriesWinner = player1Score > player2Score ? 'X' : 'O'
     await INSERT.into(History).entries({
       ID: cds.utils.uuid(),
       mode: game.mode,
       totalMatches: game.totalMatches,
       player1Score,
       player2Score,
-      winner,
+      winner: seriesWinner,
       createdAt: new Date()
     })
   }

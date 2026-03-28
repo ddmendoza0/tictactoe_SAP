@@ -19,7 +19,7 @@
             <Title text="vs" level="H4" />
           </VBox>
           <VBox alignItems="Center">
-            <Title text="{game>/mode === 'HvB' ? 'Bot' : 'Player O'}" />
+            <Title text="{= ${game>/mode} === 'HvB' ? 'Bot' : 'Player O' }" />
             <Title text="{game>/player2Score}" level="H2" />
           </VBox>
         </HBox>
