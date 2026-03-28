@@ -11,7 +11,7 @@
 3. Start the server
    `cds watch`
 
-4. Open http://localhost:4004
+4. Open http://localhost:4004/tictactoe/webapp/index.html
 
 ## Environment Variables Setup
 
@@ -23,3 +23,4 @@ If no key is provided, the bot falls back to a minimax algorithm.
 - Human vs Bot (easy / medium / hard)
 - Configurable series length: best of 3, 5, or 7
 - Game state persists across browser refreshes
+- Multilanguage browser language dependant
