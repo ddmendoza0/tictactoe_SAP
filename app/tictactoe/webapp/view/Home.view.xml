@@ -5,7 +5,7 @@
   xmlns:l="sap.ui.layout"
   xmlns:f="sap.ui.layout.form">
 
-  <Page title="Tic-Tac-Toe">
+  <Page title="{i18n>title}">
     <content>
       <VBox
         alignItems="Center"
