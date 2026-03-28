@@ -23,4 +23,5 @@ If no key is provided, the bot falls back to a minimax algorithm.
 - Human vs Bot (easy / medium / hard)
 - Configurable series length: best of 3, 5, or 7
 - Game state persists across browser refreshes
+- Match history is persisted to the database and accessible via `/odata/v4/game/History`
 - Multilanguage support (English / Spanish)

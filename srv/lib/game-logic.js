@@ -1,4 +1,4 @@
-// ******* ENDGAME *******
+
 // WINCONDITIONS
 const WINNING_COMBINATIONS = [
   [0, 1, 2], // top row
@@ -11,7 +11,7 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6], // reverse diagonal
 ]
 
-//checks win conditions
+// Checks win conditions
 function checkWinner(board) {
   for (const [a, b, c] of WINNING_COMBINATIONS) {
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
@@ -21,7 +21,7 @@ function checkWinner(board) {
   return null
 }
 
-// Other Engame
+// Check for draw
 function isBoardFull(board) {
   return board.every(cell => cell !== '')
 }

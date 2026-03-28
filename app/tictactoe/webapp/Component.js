@@ -7,7 +7,7 @@ sap.ui.define([
   return UIComponent.extend("tictactoe", {
 
     metadata: {
-      manifest: "json"
+      manifest: "json" // Load app configuration from manifest.json
     },
 
     init: function () {
@@ -20,7 +20,7 @@ sap.ui.define([
       // Restore game session from localStorage if available
       const sGameID = localStorage.getItem("tictactoe_gameID");
       const sRoute  = localStorage.getItem("tictactoe_route");
-      if (sGameID && sRoute === "game") {
+      if (sGameID && sRoute === "game") { // Only restore if the user was actually on the game screen
         const oModel = this.getModel("game");
         oModel.setProperty("/gameID", sGameID);
 

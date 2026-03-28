@@ -5,7 +5,7 @@ const { getBotMove, getAIMoveFromOpenAI } = require('./lib/bot')
 module.exports = cds.service.impl(async function () {
   const { Games, Moves } = this.entities
 
-  // Creates a new game session
+  // Creates a new game session and persists it to the database
   this.on('createGame', async (req) => {
     const { mode, totalMatches } = req.data
     const id = cds.utils.uuid()
@@ -42,7 +42,7 @@ module.exports = cds.service.impl(async function () {
     // Validate move
     if (board[position] !== '') return req.error(400, 'Position already taken')
 
-    // Apply move
+    // Apply player move
     board[position] = game.currentPlayer
     await INSERT.into(Moves).entries({
       ID: cds.utils.uuid(),
@@ -53,7 +53,7 @@ module.exports = cds.service.impl(async function () {
       createdAt: new Date()
     })
 
-    // Check result after player move
+    // Check endgame after player move
     const winner = checkWinner(board)
     const draw = !winner && isBoardFull(board)
 
@@ -68,6 +68,8 @@ module.exports = cds.service.impl(async function () {
     // Bot move if HvB mode and it's bot's turn
     if (game.mode === 'HvB' && nextPlayer === 'O') {
       const difficulty = game.difficulty || 'medium'
+      
+      //Use OpenAI if the key is set, otherwise local logic
       const botPosition = process.env.OPENAI_API_KEY
         ? await getAIMoveFromOpenAI(board, difficulty)
         : getBotMove(board, difficulty)
@@ -82,20 +84,21 @@ module.exports = cds.service.impl(async function () {
         createdAt: new Date()
       })
 
+      // Check engame trrigered by bot
       const botWinner = checkWinner(board)
       const botDraw = !botWinner && isBoardFull(board)
-
       if (botWinner || botDraw) {
         return await handleRoundEnd(Games, game, board, botWinner)
       }
 
+      // Switch back to player
       await UPDATE(Games).set({ board: boardToString(board), currentPlayer: 'X' }).where({ ID: gameID })
     }
 
     return SELECT.one(Games).where({ ID: gameID })
   })
 
-  //Resets the board for a new round keeping scores
+  //Resets the board for a new round keeping scores and game session
   this.on('newRound', async (req) => {
     const { gameID } = req.data
     const game = await SELECT.one(Games).where({ ID: gameID })
@@ -123,7 +126,7 @@ async function handleRoundEnd(Games, game, board, winner) {
   const seriesOver = player1Score >= winsNeeded || player2Score >= winsNeeded
   const isDraw = !winner
 
-    // Save to history when series ends
+  // Save to history when series ends
   if (seriesOver) {
     const { History } = cds.entities('tictactoe')
     const seriesWinner = player1Score > player2Score ? 'X' : 'O'
@@ -146,6 +149,7 @@ async function handleRoundEnd(Games, game, board, winner) {
     player2Score
   }).where({ ID: game.ID })
 
+  // Attach isDraw to the result so the frontend can display the correct message
   const result = await SELECT.one(Games).where({ ID: game.ID })
   result.isDraw = isDraw
   return result

@@ -1,5 +1,6 @@
 namespace tictactoe;
 
+// Represents an active or completed game session
 entity Game {
   key ID        : UUID;
   mode          : String enum { HvH; HvB; };
@@ -13,6 +14,7 @@ entity Game {
   createdAt     : Timestamp;
 }
 
+// Represents a single move made during a game
 entity Move {
   key ID       : UUID;
   game         : Association to Game;
@@ -22,6 +24,7 @@ entity Move {
   createdAt    : Timestamp;
 }
 
+// Stores a summary of each completed series for historical reference
 entity History {
   key ID        : UUID;
   mode          : String;

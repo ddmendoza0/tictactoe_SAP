@@ -1,5 +1,6 @@
 using tictactoe from '../db/schema';
 
+// Exposes entities and actions
 service GameService {
   entity Games as projection on tictactoe.Game;
   entity Moves as projection on tictactoe.Move;

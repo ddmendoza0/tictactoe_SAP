@@ -40,6 +40,7 @@ function minimax(board, isMaximizing) {
   }
 }
 
+// Easy mode — picks the worst possible move using reverse minimax
 function getEasyMove(board) {
   let worstScore = Infinity
   let worstMove = null
@@ -57,6 +58,7 @@ function getEasyMove(board) {
   return worstMove
 }
 
+// Hard mode — picks the best possible move using minimax
 function getHardMove(board) {
   let bestScore = -Infinity
   let bestMove = null
@@ -75,7 +77,7 @@ function getHardMove(board) {
 }
 
 // Returns best move based on difficulty
-// easy — reverseminimax, medium — minimax+random, hard — minimax
+// medium — 50% chance of random move, 50% chance of optimal move
 function getBotMove(board, difficulty) {
   if (difficulty === 'easy') return getEasyMove(board)
 
