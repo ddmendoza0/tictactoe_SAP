@@ -13,7 +13,7 @@
 
 4. Open http://localhost:4004
 
-## Environment variables
+## Environment Variables Setup
 
 Copy `.env.example` to `.env` and fill in your OpenAI key.
 If no key is provided, the bot falls back to a minimax algorithm.
