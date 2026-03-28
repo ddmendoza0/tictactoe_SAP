@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Clone this repositorie
+1. Clone this repository
    `git clone https://github.com/ddmendoza0/tictactoe_SAP.git`
    `cd tictactoe_SAP`
 
@@ -29,3 +29,9 @@ If no key is provided, the bot falls back to a minimax algorithm.
 - Game state persists across browser refreshes
 - Match history is persisted to the database and accessible via `/odata/v4/game/History`
 - Multilanguage support (English / Spanish)
+
+## Tech Stack
+- Backend: SAP CAP (Node.js) with CDS models and OData V4
+- Frontend: SAPUI5 (sap_horizon theme)
+- Database: SQLite (local development)
+- AI: OpenAI gpt-4o-mini with minimax fallback
