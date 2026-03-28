@@ -2,16 +2,20 @@
 
 ## Setup
 
-1. Install dependencies
+1. Clone this repositorie
+   `git clone https://github.com/ddmendoza0/tictactoe_SAP.git`
+   `cd tictactoe_SAP`
+
+2. Install dependencies
    `npm install`
 
-2. Deploy the database
+3. Deploy the database
    `cds deploy --to sqlite:db/tictactoe.db`
 
-3. Start the server
+4. Start the server
    `cds watch`
 
-4. Open http://localhost:4004/tictactoe/webapp/index.html
+5. Open http://localhost:4004/tictactoe/webapp/index.html
 
 ## Environment Variables Setup
 
