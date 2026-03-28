@@ -20,3 +20,13 @@ entity Move {
   moveNumber   : Integer;
   createdAt    : Timestamp;
 }
+
+entity History {
+  key ID        : UUID;
+  mode          : String;
+  totalMatches  : Integer;
+  player1Score  : Integer;
+  player2Score  : Integer;
+  winner        : String;
+  createdAt     : Timestamp;
+}

@@ -122,6 +122,21 @@ async function handleRoundEnd(Games, game, board, winner) {
   const seriesOver = player1Score >= winsNeeded || player2Score >= winsNeeded
   const isDraw = !winner
 
+    // Save to history when series ends
+  if (seriesOver) {
+    const { History } = cds.entities('tictactoe')
+    const winner = player1Score > player2Score ? 'X' : 'O'
+    await INSERT.into(History).entries({
+      ID: cds.utils.uuid(),
+      mode: game.mode,
+      totalMatches: game.totalMatches,
+      player1Score,
+      player2Score,
+      winner,
+      createdAt: new Date()
+    })
+  }
+
   await UPDATE(Games).set({
     board: boardToString(board),
     status: seriesOver ? 'finished' : 'roundOver',

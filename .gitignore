@@ -20,3 +20,6 @@ mta_archives/
 
 # Environment variables
 .env
+
+# DB
+db/tictactoe.db
