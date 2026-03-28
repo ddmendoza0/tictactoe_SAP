@@ -6,7 +6,7 @@
    `npm install`
 
 2. Deploy the database
-   ```cds deploy --to sqlite/tictactoe.db```
+   `cds deploy --to sqlite:db/tictactoe.db`
 
 3. Start the server
    `cds watch`
